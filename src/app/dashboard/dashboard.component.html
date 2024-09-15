@@ -1,0 +1,80 @@
+<div class="container">
+  <h2>{{below5k ? 'All' : 'Active'}} Customers</h2>
+  <div class="filter">
+    <input type="checkbox" id="checkbox" (change)="accountsBelow5k($event)">
+    <label for="checkbox">Accounts with atleast one transaction below 5000</label>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Accounts</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of customerDataTable | paginate: { itemsPerPage: 10, currentPage: p }">
+        <td>{{ customer.name }}</td>
+        <td>{{ customer.address }}</td>
+        <td>
+          <span *ngFor="let account of customer.accounts">
+            <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="viewTransactions(account)">{{
+              account }}</button>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="pagination">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+
+  <h2>Distinct Products List</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Distinct Products</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dp of distinctProducts">
+        <td>{{dp}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Transactions</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let trans of transactions">
+              <td>{{trans.date | date}}</td>
+              <td>{{trans.amount}}</td>
+              <td>{{trans.price | currency:'INR'}}</td>
+              <td>{{trans.total | currency:'INR'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

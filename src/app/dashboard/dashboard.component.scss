@@ -1,0 +1,71 @@
+.container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+
+    label {
+        cursor: pointer;
+        margin-left: 5px;
+    }
+}
+
+table {
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 5px;
+
+    thead {
+        tr {
+            height: 50px;
+            background-color: yellow;
+
+            th {
+                text-align: center;
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            transition: .3s ease;
+
+            &:hover {
+                background-color: rgba(232, 232, 232, 0.695);
+            }
+
+            td {
+                text-align: center;
+
+                span {
+                    display: flex;
+                    flex-direction: column;
+
+                    button {
+                        background: transparent;
+                        border: none;
+
+                        &:hover {
+                            text-decoration: underline;
+                            color: blue;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.pagination {
+    display: flex;
+    justify-content: right;
+    margin-top: 10px;
+}
